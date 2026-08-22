@@ -30,4 +30,4 @@ def load_data() -> pd.DataFrame:
 #         data = load_data()
 #         logger.info("Data loading completed successfully.")
 #     except Exception as e:
-#         logger.exception("An error occurred while loading the data.")
+#         logger.exception("An error occurred while loading the data."
