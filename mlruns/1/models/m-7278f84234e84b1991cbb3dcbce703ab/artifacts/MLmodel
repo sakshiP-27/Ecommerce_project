@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/saksh/OneDrive - University of Keele/Desktop/Ecommerce_project/mlruns/1/models/m-7278f84234e84b1991cbb3dcbce703ab/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.12.4
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.5.2
+    skops_trusted_types: null
+mlflow_version: 3.15.1
+model_id: m-7278f84234e84b1991cbb3dcbce703ab
+model_size_bytes: 30029
+model_uuid: m-7278f84234e84b1991cbb3dcbce703ab
+prompts: null
+run_id: b1fc214f110e4462b2fcff567e25099f
+utc_time_created: '2026-08-23 17:39:40.703847'

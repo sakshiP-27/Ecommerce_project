@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/saksh/OneDrive - University of Keele/Desktop/Ecommerce_project/mlruns/1/models/m-f7c86cb0f2f142c2be243db880a7d719/artifacts
+flavors:
+  catboost:
+    catboost_version: 1.2.10
+    code: null
+    data: model.cb
+    model_type: CatBoostClassifier
+    save_format: cbm
+  python_function:
+    data: model.cb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.catboost
+    python_version: 3.12.4
+mlflow_version: 3.15.1
+model_id: m-f7c86cb0f2f142c2be243db880a7d719
+model_size_bytes: 44160
+model_uuid: m-f7c86cb0f2f142c2be243db880a7d719
+prompts: null
+run_id: f4c2f42e600342e0b8fedd1e8a47610c
+utc_time_created: '2026-08-24 07:44:18.931000'

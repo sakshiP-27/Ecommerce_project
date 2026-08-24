@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/saksh/OneDrive - University of Keele/Desktop/Ecommerce_project/mlruns/1/models/m-55508c2fe35a43eb983cfd877474fc42/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.12.4
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.4.1
+mlflow_version: 3.15.1
+model_id: m-55508c2fe35a43eb983cfd877474fc42
+model_size_bytes: 107159
+model_uuid: m-55508c2fe35a43eb983cfd877474fc42
+prompts: null
+run_id: 67ed7267a70f4667abcf39f234f6c57b
+utc_time_created: '2026-08-24 07:44:10.311020'
