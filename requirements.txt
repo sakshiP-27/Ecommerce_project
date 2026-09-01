@@ -1,0 +1,23 @@
+# Core — pin sklearn to the version that created the .pkl files
+numpy>=1.24,<2.0
+pandas>=2.0,<2.3
+scikit-learn==1.5.2
+PyYAML>=6.0
+joblib>=1.3
+
+# Model
+catboost>=1.2
+
+# API
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.0
+
+# Explainability
+shap>=0.44
+lime>=0.2
+matplotlib>=3.7
+
+# Dashboard
+streamlit>=1.32
+plotly>=5.18

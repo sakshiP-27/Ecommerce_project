@@ -31,7 +31,10 @@ FEATURE_NAMES = list(pipeline.get_feature_names_out())
 
 app = FastAPI(
     title="Ecommerce Purchase-Intent API",
-    description="Predict purchase likelihood for a session and return top SHAP feature contributions.",
+    description=(
+        "Predict purchase likelihood for a session and return "
+        "top SHAP feature contributions."
+    ),
     version="1.0.0",
 )
 

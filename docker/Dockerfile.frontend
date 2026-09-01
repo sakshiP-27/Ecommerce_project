@@ -1,0 +1,21 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app
+
+COPY requirements.txt .
+
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src/ ./src/
+COPY reports/ ./reports/
+COPY dataset/ ./dataset/
+
+EXPOSE 8501
+CMD ["streamlit", "run", "src/dashboard/Home.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]

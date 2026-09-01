@@ -36,10 +36,12 @@ col4.metric("Decision threshold", f"{threshold:.2f}")
 
 st.markdown(
     f"""
-**Model in use:** `{type(model).__name__}` (loaded from saved artifact)  
-**Pipeline:** `{type(pipeline).__name__}` with {len(pipeline.get_feature_names_out())} output features  
+**Model in use:** `{type(model).__name__}` (loaded from saved artifact)
+**Pipeline:** `{type(pipeline).__name__}` with
+{len(pipeline.get_feature_names_out())} output features
 
-Use the sidebar for Live Scoring, Funnel Analytics, Model Comparison, Explainability, and Performance Metrics.
+Use the sidebar for Live Scoring, Funnel Analytics, Model Comparison,
+Explainability, and Performance Metrics.
 """
 )
 

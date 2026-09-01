@@ -1,0 +1,18 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    ports:
+      - 8000:8000
+    environment:
+      - PYTHONPATH=/app
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - 8501:8501
+    depends_on:
+      - api

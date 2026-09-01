@@ -5,10 +5,8 @@ _ROOT = Path(__file__).resolve().parents[3]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-import numpy as np
 import pandas as pd
 import plotly.express as px
-import plotly.figure_factory as ff
 import streamlit as st
 from sklearn.metrics import (
     confusion_matrix,
@@ -67,16 +65,15 @@ st.caption(f"Operating threshold from config: **{threshold:.2f}**")
 
 # Confusion matrix
 cm = confusion_matrix(y_test, y_pred)
-cm_text = [[str(v) for v in row] for row in cm]
-fig_cm = ff.create_annotated_heatmap(
-    z=cm,
+fig_cm = px.imshow(
+    cm,
     x=["Pred No Purchase", "Pred Purchase"],
     y=["Actual No Purchase", "Actual Purchase"],
-    annotation_text=cm_text,
-    colorscale="Blues",
-    showscale=False,
+    text_auto=True,
+    color_continuous_scale="Blues",
+    title="Confusion Matrix (final CatBoost)",
 )
-fig_cm.update_layout(title="Confusion Matrix (final CatBoost)")
+fig_cm.update_layout(coloraxis_showscale=False)
 st.plotly_chart(fig_cm, use_container_width=True)
 
 # Precision-recall curve
@@ -123,8 +120,8 @@ st.markdown(
 
 We operate at **{threshold:.2f}** (from `config.yaml`).
 
-- Lower thresholds (e.g. 0.3–0.4) catch more buyers (higher recall) but create more false alarms.  
-- Higher thresholds (e.g. 0.6) are more precise but miss more true buyers.  
+- Lower thresholds (e.g. 0.3–0.4) catch more buyers (higher recall) but create more false alarms.
+- Higher thresholds (e.g. 0.6) are more precise but miss more true buyers.
 - **0.5** is a balanced default for this project: solid precision (~0.82) while still recovering
   a large share of buyers (~0.76 recall) on the Week 2 evaluation.
 

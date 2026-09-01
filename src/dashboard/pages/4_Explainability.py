@@ -42,9 +42,9 @@ st.markdown(
     """
 Across the test set, the strongest drivers are typically:
 
-1. **PageValues** — high values push toward purchase; zero/low values push against it  
-2. **ProductRelated / TotalPages** — more engagement supports purchase intent  
-3. **ExitRates / BounceRates** — higher rates push toward no purchase  
+1. **PageValues** — high values push toward purchase; zero/low values push against it
+2. **ProductRelated / TotalPages** — more engagement supports purchase intent
+3. **ExitRates / BounceRates** — higher rates push toward no purchase
 
 Use **Live Session Scoring** for interactive local waterfall explanations on any session.
 """

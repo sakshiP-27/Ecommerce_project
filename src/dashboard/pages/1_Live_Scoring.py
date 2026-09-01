@@ -213,7 +213,9 @@ with st.form("session_form"):
         )
         weekend = st.checkbox("Weekend", key="score_Weekend")
 
-    submitted = st.form_submit_button("Score this session", type="primary", use_container_width=True)
+    submitted = st.form_submit_button(
+        "Score this session", type="primary", use_container_width=True
+    )
 
 if submitted:
     session = {
