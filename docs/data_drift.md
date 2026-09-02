@@ -1,4 +1,4 @@
-# Data-drift check (stretch goal #7)
+# Data-drift check (Goal #7)
 
 ## What it does
 
