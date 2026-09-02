@@ -20,8 +20,6 @@ Also confirms the saved CatBoost model / pipeline loaded correctly.
 
 ## 2. Live Session Scoring (main demo page)
 
-This is the one to show in a demo.
-
 **What you can do**
 1. Click **Load a random real session** (fills the form from the CSV), or type values yourself.
 2. Click **Score this session**.
@@ -43,13 +41,13 @@ Interactive Plotly charts for conversion rate by:
 - Traffic type
 - Weekend vs weekday
 
-Hover on bars to see session/purchase counts. This is basically Week 1 EDA, but clickable.
+Hover on bars to see session/purchase counts.
 
 ---
 
 ## 4. Model Comparison
 
-Week 2 results table + charts.
+results table + charts.
 
 Look at **PR-AUC** first (better headline metric than accuracy here because purchases are rarer). CatBoost is the model I saved and shipped, even though XGBoost was very close on PR-AUC.
 
@@ -77,6 +75,6 @@ There’s also a short justification for sticking with 0.5 for this project.
 
 ## Tips
 
-- If a page errors the first time, refresh once — model load can take a second.
+- If a page errors the first time, refresh once, model load can take a second.
 - You don’t need the API running for Live Scoring right now; the dashboard loads the pickle files itself.
 - Unknown months won’t crash scoring/API thanks to `handle_unknown="ignore"` in the encoder.

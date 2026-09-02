@@ -1,6 +1,6 @@
 # Architecture
 
-Simple view of how the pieces connect. Nothing fancy — just the flow I actually built.
+Simple view of how the pieces connect.
 
 ```text
 ┌──────────────────────┐
@@ -59,6 +59,6 @@ SHAP `TreeExplainer` is built from the CatBoost model.
 - Dashboard Live Scoring: shows waterfall + top features for the session you score
 - Explainability page: shows the global SHAP plots saved under `reports/`
 
-## Design choice I stuck to
+## Design choice made
 
 The dashboard **does not retrain** anything. It only reads the Week 2/3 artifacts. Training stays in the notebooks/scripts.

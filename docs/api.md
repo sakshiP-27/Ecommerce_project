@@ -55,4 +55,4 @@ You can also hit:
 - Model + pipeline + SHAP explainer load **once at startup** (not per request).
 - Engineered features are added inside `/predict` before the pipeline runs.
 - Unknown categories (e.g. `Month: "Smarch"`) shouldn’t crash the API because the encoder uses `handle_unknown="ignore"`.
-- PowerShell tip: don’t use Linux-style `curl -H ...` — use `Invoke-RestMethod` or just use `/docs`.
+- PowerShell tip: don’t use Linux-style `curl -H ...`  use `Invoke-RestMethod` or just use `/docs`.

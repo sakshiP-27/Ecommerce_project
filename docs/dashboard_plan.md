@@ -1,4 +1,4 @@
-# Week 4 Step 1 — Dashboard Section Plan
+# Week 4 Step 1 : Dashboard Section Plan
 
 One-line plan for each section (before writing Streamlit code).
 
@@ -12,7 +12,7 @@ One-line plan for each section (before writing Streamlit code).
 | 6 | **Performance Metrics** | Final CatBoost detail: confusion matrix, precision–recall curve, threshold = 0.5, and the plain-English justification. |
 
 ## Priority / polish order
-1. Live Session Scoring (most important demo page)
+1. Live Session Scoring 
 2. Overview
 3. Explainability
 4. Model Comparison + Performance Metrics
@@ -26,5 +26,3 @@ One-line plan for each section (before writing Streamlit code).
 - SHAP/LIME: `notebooks/04_explainabliity.ipynb`, `reports/shap_*.png`
 - Model card: `reports/model_card.md`
 
-## Done condition (Step 1)
-✅ Six one-line section descriptions written before building Streamlit pages.

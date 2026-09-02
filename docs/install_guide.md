@@ -2,10 +2,10 @@
 
 This is for someone cloning the repo for the first time.
 
-## Option A — Docker (recommended)
+## Option A : Docker
 
 ### What you need
-- Docker Desktop installed and actually running (whale icon in the system tray)
+- Docker Desktop installed and actually running 
 - Git
 
 ### Steps
@@ -14,7 +14,7 @@ This is for someone cloning the repo for the first time.
    git clone <your-repo-url>
    cd Ecommerce_project
    ```
-2. Copy the env example if you want (optional for the current app):
+2. Copy the env example if you want 
    ```bash
    copy .env.example .env
    ```
@@ -31,7 +31,7 @@ This is for someone cloning the repo for the first time.
 - **`requirements.txt` / `dataset` not found during build**  
   Make sure you’re in the project root (where `docker-compose.yml` is).
 - **sklearn pickle / `_RemainderColsList` error**  
-  Needs `scikit-learn==1.5.2` (already pinned in `requirements.txt`). Rebuild with `--no-cache` if an old image stuck around.
+  Needs `scikit-learn==1.5.2`. Rebuild with `--no-cache` if an old image stuck around.
 - **Can’t reach `registry-1.docker.io`**  
   Network/DNS/VPN problem with Docker Hub. Restart Docker Desktop, or run Option B locally.
 
@@ -40,7 +40,7 @@ This is for someone cloning the repo for the first time.
 ## Option B — Local Python (no Docker)
 
 ### What you need
-- Python 3.11-ish (I used Anaconda)
+- Python 3.11 or higher
 - The repo contents including:
   - `dataset/ecommerce_sessions.csv`
   - `src/models/final_model.pkl`
@@ -48,10 +48,10 @@ This is for someone cloning the repo for the first time.
 
 ### Steps
 1. Open a terminal in the project root.
-2. Create/activate an environment (example with conda):
+2. Create/activate an environment:
    ```bash
-   conda create -n ecommerce python=3.11 -y
-   conda activate ecommerce
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
    ```
 3. Install packages:
    ```bash
@@ -88,4 +88,4 @@ pytest tests/ -q
 
 1. Confirm you’re in the repo root (you should see `src/`, `docker-compose.yml`, `requirements.txt`).
 2. Confirm the two pickle files exist under `src/models/`.
-3. Don’t retrain inside the dashboard — it only reads saved artifacts.
+3. Don’t retrain inside the dashboard, it only reads saved artifacts.

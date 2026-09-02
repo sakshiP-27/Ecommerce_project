@@ -1,10 +1,7 @@
 # Model Card: Ecommerce Purchase-Intent Predictor
 
-*(Same content as `reports/model_card.md` — included here for the Week 4 docs set.)*
-
 **Model:** CatBoost classifier (`final_model.pkl`)  
 **Project:** Purchase-intent prediction from ecommerce sessions  
-**Updated:** August 2026
 
 ---
 
@@ -59,7 +56,3 @@ On a few example sessions, SHAP and LIME both pointed at **PageValues** a lot, w
 - Threshold 0.5 is a project choice, not guaranteed “best ROI” for every business.
 
 ---
-
-## Practical note
-
-Use this to **support** decisions, not to automatically treat visitors unfairly. If the site or traffic mix changes a lot, retrain and re-check the metrics.

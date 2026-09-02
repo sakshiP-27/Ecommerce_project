@@ -26,18 +26,18 @@ We already have local Docker recipes:
    ```bash
    docker compose build
    ```
-   This produces the `api` and `frontend` images.
+   This produces the `backend` and `frontend` images.
 
 2. **Create two ECR repositories**  
-   Example names: `ecommerce-api` and `ecommerce-dashboard`.
+   Example names: `ecommerce-backend` and `ecommerce-frontend`.
 
 3. **Authenticate Docker to ECR and push**  
    ```bash
    aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account>.dkr.ecr.<region>.amazonaws.com
-   docker tag ecommerce_project-api:latest <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-api:latest
-   docker tag ecommerce_project-frontend:latest <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-dashboard:latest
-   docker push <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-api:latest
-   docker push <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-dashboard:latest
+   docker tag ecommerce_project-api:latest <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-backend:latest
+   docker tag ecommerce_project-frontend:latest <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-frontend:latest
+   docker push <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-backend:latest
+   docker push <account>.dkr.ecr.<region>.amazonaws.com/ecommerce-frontend:latest
    ```
 
 4. **Run the containers**
@@ -85,19 +85,14 @@ Internet
    │
    ▼
 Load Balancer
-   ├─ /api/*     → ECS service: ecommerce-api       (port 8000)
-   └─ /dash/*    → ECS service: ecommerce-dashboard (port 8501)
+   ├─ /api/*     → ECS service: ecommerce-backend       (port 8000)
+   └─ /dash/*    → ECS service: ecommerce-frontend (port 8501)
          │
          ▼
        ECR (images)
 ```
 
 ---
-
-## What we are *not* doing for the coursework
-
-- No live 24/7 AWS deployment is required.
-- This document proves the project is **AWS-ready**: containers exist, services are chosen, and env/config needs are listed.
 
 To validate locally before any cloud push:
 
@@ -106,5 +101,5 @@ docker compose up --build
 ```
 
 Then open:
-- API docs: http://localhost:8000/docs  
-- Dashboard: http://localhost:8501  
+- Backend docs: http://localhost:8000/docs  
+- Frontend : http://localhost:8501  
