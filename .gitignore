@@ -50,3 +50,5 @@ dataset/*
 *.log
 *.tmp
 .cache/
+
+Week*_Guide.md
