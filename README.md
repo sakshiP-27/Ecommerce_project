@@ -76,7 +76,8 @@ More detail:
 - Architecture: [docs/architecture.md](docs/architecture.md)  
 - API notes: [docs/api.md](docs/api.md)  
 - AWS plan: [docs/deployment.md](docs/deployment.md)  
-- Model card: [docs/model_card.md](docs/model_card.md) (same as `reports/model_card.md`)
+- Model card: [docs/model_card.md](docs/model_card.md) (same as `reports/model_card.md`)  
+- Decision write-ups (PageValues, threshold, SHAP notes): [docs/project_writeups.md](docs/project_writeups.md)
 
 ---
 
