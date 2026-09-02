@@ -6,8 +6,12 @@ if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 import streamlit as st
+from sklearn.model_selection import train_test_split
 
+from src.config.settings import load_config
 from src.dashboard.loaders import load_data, load_model, load_pipeline, load_threshold
+from src.evaluation.drift import check_dataframe_drift
+from src.features.engineering import add_engineered_features
 
 st.set_page_config(
     page_title="Purchase-Intent Dashboard",
@@ -48,4 +52,42 @@ Explainability, and Performance Metrics.
 st.success(
     "Step 3: data uses `@st.cache_data`; model/pipeline use `@st.cache_resource`. "
     "Clicking around should stay fast because artifacts are not reloaded from disk every time."
+)
+
+# --- Stretch goal #7: simple drift status ---
+st.subheader("Data drift status")
+config = load_config()
+df_feat = add_engineered_features(df.copy())
+train_df, holdout_df = train_test_split(
+    df_feat,
+    test_size=config["test_size"],
+    random_state=config["random_seed"],
+)
+control = check_dataframe_drift(train_df, holdout_df)
+
+shifted = holdout_df.copy()
+for col in ["PageValues", "BounceRates", "ExitRates", "ProductRelated"]:
+    if col in shifted.columns:
+        shifted[col] = shifted[col] * 5 + 10
+shifted_result = check_dataframe_drift(train_df, shifted)
+
+c_left, c_right = st.columns(2)
+with c_left:
+    if control["batch_drifted"]:
+        st.error(f"Holdout split: {control['message']} ({control['n_drifted']} features)")
+    else:
+        st.success(f"Holdout split: {control['message']} ({control['n_drifted']} features flagged)")
+with c_right:
+    if shifted_result["batch_drifted"]:
+        st.error(
+            f"Simulated shift: {shifted_result['message']} "
+            f"({shifted_result['n_drifted']} features) — checker works"
+        )
+    else:
+        st.warning("Simulated shift did not flag drift (unexpected).")
+
+st.caption(
+    "KS test on numeric features vs training split. "
+    "Batch drift = at least 3 features with p < 0.05. "
+    "See `docs/data_drift.md`."
 )

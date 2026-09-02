@@ -12,3 +12,8 @@ categorical_columns:
   - "Month"
   - "Weekend"
 threshold: 0.5
+# Stretch goal #1 — simple business costs for profit-curve thresholding
+# intervention_cost: cost of acting on a flagged session (e.g. discount / outreach)
+# conversion_value: value of correctly catching one purchase
+intervention_cost: 5
+conversion_value: 50

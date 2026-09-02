@@ -51,6 +51,15 @@ def load_explainer():
     return shap.TreeExplainer(model)
 
 
+@st.cache_resource
+def load_calibrated_model():
+    """Load isotonic-calibrated wrapper if the stretch-goal artifact exists."""
+    path = MODELS_DIR / "calibrated_model.pkl"
+    if not path.exists():
+        return None
+    return joblib.load(path)
+
+
 @st.cache_data
 def load_threshold() -> float:
     from src.config.settings import load_config
