@@ -79,5 +79,5 @@ client.transition_model_version_stage(
 
 ## Notes
 
-- This stretch goal versions models in the **MLflow Registry**. The FastAPI/dashboard still load `src/models/final_model.pkl` swapping that pickle to match Registry Production would be a separate deployment step.
+- This goal versions models in the **MLflow Registry**. The FastAPI/dashboard still load `src/models/final_model.pkl` swapping that pickle to match Registry Production would be a separate deployment step.
 - Newer MLflow builds may warn that stages are legacy (aliases are the newer API). Stages are what the assignment asks for and still work for this project.

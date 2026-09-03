@@ -9,15 +9,26 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-st.set_page_config(page_title="Model Comparison", layout="wide")
-st.title("Model Comparison")
-st.markdown(
-    "Week 2 evaluation results across candidate models. "
-    "**Headline metric: PR-AUC** (better than accuracy on imbalanced purchase data). "
-    "Final chosen model: **CatBoost** (saved for the API / dashboard)."
+from src.dashboard.theme import (
+    COLORWAY,
+    FLAME,
+    TRUFFLE,
+    apply_cartiq_theme,
+    page_setup,
+    style_figure,
 )
 
-# Metrics from notebooks/03_model_evaluation.ipynb (test set)
+page_setup("Model Comparison")
+apply_cartiq_theme()
+
+st.markdown('<div class="cartiq-kicker">Model lab</div>', unsafe_allow_html=True)
+st.title("Model comparison")
+st.markdown(
+    "Held-out evaluation across candidate models. "
+    "**Headline metric: PR-AUC**  -  better than accuracy when purchases are rare. "
+    "CartIQ ships with **CatBoost** as the production model."
+)
+
 metrics = pd.DataFrame(
     [
         {
@@ -89,12 +100,13 @@ fig = px.bar(
     x="Model",
     y="PR-AUC",
     color="Model",
-    title="PR-AUC by Model (higher is better)",
+    title="PR-AUC by model (higher is better)",
     text="PR-AUC",
+    color_discrete_sequence=COLORWAY,
 )
 fig.update_traces(texttemplate="%{text:.3f}", textposition="outside")
-fig.update_layout(yaxis_range=[0, 1], showlegend=False)
-st.plotly_chart(fig, use_container_width=True)
+fig.update_layout(yaxis_range=[0, 1.05], showlegend=False)
+st.plotly_chart(style_figure(fig), use_container_width=True)
 
 fig2 = px.bar(
     metrics.melt(
@@ -107,13 +119,14 @@ fig2 = px.bar(
     y="Score",
     color="Metric",
     barmode="group",
-    title="Precision / Recall / F1 by Model",
+    title="Precision / Recall / F1 by model",
+    color_discrete_sequence=[FLAME, TRUFFLE, "#C9C1B1"],
 )
 fig2.update_layout(yaxis_range=[0, 1])
-st.plotly_chart(fig2, use_container_width=True)
+st.plotly_chart(style_figure(fig2), use_container_width=True)
 
 st.info(
-    "XGBoost edged CatBoost slightly on PR-AUC, but **CatBoost** was selected as the final "
-    "deployed model (strong PR-AUC ~0.86, solid recall/precision balance, and used for the "
-    "saved `final_model.pkl` + SHAP explanations)."
+    "XGBoost edged CatBoost slightly on PR-AUC, but **CatBoost** is the production "
+    "choice for CartIQ  -  strong PR-AUC (~0.86), solid precision/recall balance, "
+    "and the model behind live scoring and SHAP explanations."
 )

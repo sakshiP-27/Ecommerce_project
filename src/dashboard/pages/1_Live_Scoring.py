@@ -18,13 +18,17 @@ from src.dashboard.loaders import (
     load_pipeline,
     load_threshold,
 )
+from src.dashboard.theme import ABYSS, PALLADIAN, apply_cartiq_theme, page_setup
 from src.features.engineering import add_engineered_features
 
-st.set_page_config(page_title="Live Session Scoring", layout="wide")
-st.title("Live Session Scoring")
+page_setup("Live Scoring")
+apply_cartiq_theme()
+
+st.markdown('<div class="cartiq-kicker">Live scoring</div>', unsafe_allow_html=True)
+st.title("Score a session")
 st.markdown(
     "Enter session details (or load a real row), then get a **live prediction** "
-    "and a **SHAP explanation** of why the model said that."
+    "and a **SHAP explanation** of why CartIQ said that."
 )
 
 df = load_data()
@@ -292,8 +296,15 @@ if submitted:
             data=dense[0],
             feature_names=feature_names,
         )
-        fig = plt.figure()
+        plt.style.use("dark_background")
+        fig = plt.figure(facecolor=ABYSS)
+        ax = plt.gca()
+        ax.set_facecolor(ABYSS)
         shap.plots.waterfall(explanation, max_display=10, show=False)
+        fig.patch.set_facecolor(ABYSS)
+        for spine in ax.spines.values():
+            spine.set_color(PALLADIAN)
+        ax.tick_params(colors=PALLADIAN)
         st.pyplot(fig, clear_figure=True)
         plt.close(fig)
 

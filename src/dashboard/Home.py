@@ -10,52 +10,78 @@ from sklearn.model_selection import train_test_split
 
 from src.config.settings import load_config
 from src.dashboard.loaders import load_data, load_model, load_pipeline, load_threshold
+from src.dashboard.theme import page_setup
 from src.evaluation.drift import check_dataframe_drift
 from src.features.engineering import add_engineered_features
 
-st.set_page_config(
-    page_title="Purchase-Intent Dashboard",
-    page_icon="🛒",
-    layout="wide",
-)
+page_setup("Home")
 
-st.title("Purchase-Intent Prediction Dashboard")
-st.caption("Overview — headline stats from the saved dataset (cached loaders).")
-
-# Cached loads — reused across pages / reruns (no retrain here)
 df = load_data()
 model = load_model()
 pipeline = load_pipeline()
 threshold = load_threshold()
 
 n_sessions = len(df)
-conversion_rate = df["Converted"].mean()
+conversion_rate = float(df["Converted"].mean())
 n_buyers = int(df["Converted"].sum())
-
-col1, col2, col3, col4 = st.columns(4)
-col1.metric("Total sessions", f"{n_sessions:,}")
-col2.metric("Conversion rate", f"{conversion_rate:.1%}")
-col3.metric("Purchases", f"{n_buyers:,}")
-col4.metric("Decision threshold", f"{threshold:.2f}")
 
 st.markdown(
     f"""
-**Model in use:** `{type(model).__name__}` (loaded from saved artifact)
-**Pipeline:** `{type(pipeline).__name__}` with
-{len(pipeline.get_feature_names_out())} output features
-
-Use the sidebar for Live Scoring, Funnel Analytics, Model Comparison,
-Explainability, and Performance Metrics.
-"""
+<div class="cartiq-hero">
+  <div class="cartiq-hero-bg"></div>
+  <div class="cartiq-hero-inner">
+    <div class="cartiq-mark">IQ</div>
+    <div class="cartiq-hero-copy">
+      <p class="cartiq-brand" style="font-size:72px !important;font-weight:700 !important;line-height:0.9 !important;color:#FFFFFF !important;margin:0 0 0.65rem 0 !important;font-family:'Space Grotesk',sans-serif !important;">CartIQ</p>
+      <p class="cartiq-tagline">Intelligence Behind Every Cart.</p>
+      <p class="cartiq-support">
+        Purchase-intent scoring for ecommerce sessions: live predictions,
+        clear explanations, and metrics your product team can act on.
+      </p>
+    </div>
+    <div class="cartiq-hero-meta">
+      <span class="cartiq-chip">{type(model).__name__} model</span>
+      <span class="cartiq-chip">{len(pipeline.get_feature_names_out())} features</span>
+      <span class="cartiq-chip">Threshold {threshold:.2f}</span>
+      <span class="cartiq-chip">{conversion_rate:.1%} conversion</span>
+    </div>
+  </div>
+</div>
+""",
+    unsafe_allow_html=True,
 )
 
-st.success(
-    "Step 3: data uses `@st.cache_data`; model/pipeline use `@st.cache_resource`. "
-    "Clicking around should stay fast because artifacts are not reloaded from disk every time."
-)
+cta1, cta2, _ = st.columns([1.15, 1.15, 2])
+with cta1:
+    st.page_link("pages/1_Live_Scoring.py", label="Score a session")
+with cta2:
+    st.page_link("pages/5_Performance_Metrics.py", label="View performance")
 
-# --- Stretch goal #7: simple drift status ---
-st.subheader("Data drift status")
+st.markdown('<div class="cartiq-section">', unsafe_allow_html=True)
+st.markdown('<div class="cartiq-kicker">At a glance</div>', unsafe_allow_html=True)
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Sessions", f"{n_sessions:,}")
+col2.metric("Conversion rate", f"{conversion_rate:.1%}")
+col3.metric("Purchases", f"{n_buyers:,}")
+col4.metric("Default threshold", f"{threshold:.2f}")
+
+st.markdown(
+    f"""
+<div class="cartiq-panel">
+  <div class="cartiq-kicker">In production</div>
+  <p style="margin:0;color:#C9C1B1;font-family:'Source Sans 3',sans-serif;line-height:1.55;">
+    <strong style="color:#EEE9DF;">{type(model).__name__}</strong> with a fitted preprocessing pipeline.
+    Open <em>Live Scoring</em> for a session prediction, or use the sidebar for funnels,
+    model comparison, explanations, and performance.
+  </p>
+</div>
+""",
+    unsafe_allow_html=True,
+)
+st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown('<div class="cartiq-section">', unsafe_allow_html=True)
+st.markdown('<div class="cartiq-kicker">Data health</div>', unsafe_allow_html=True)
 config = load_config()
 df_feat = add_engineered_features(df.copy())
 train_df, holdout_df = train_test_split(
@@ -74,20 +100,22 @@ shifted_result = check_dataframe_drift(train_df, shifted)
 c_left, c_right = st.columns(2)
 with c_left:
     if control["batch_drifted"]:
-        st.error(f"Holdout split: {control['message']} ({control['n_drifted']} features)")
+        st.error(f"Holdout check: {control['message']} ({control['n_drifted']} features)")
     else:
-        st.success(f"Holdout split: {control['message']} ({control['n_drifted']} features flagged)")
+        st.success(
+            f"Holdout check: {control['message']} ({control['n_drifted']} features flagged)"
+        )
 with c_right:
     if shifted_result["batch_drifted"]:
         st.error(
             f"Simulated shift: {shifted_result['message']} "
-            f"({shifted_result['n_drifted']} features) — checker works"
+            f"({shifted_result['n_drifted']} features). Monitor is working"
         )
     else:
         st.warning("Simulated shift did not flag drift (unexpected).")
 
 st.caption(
-    "KS test on numeric features vs training split. "
-    "Batch drift = at least 3 features with p < 0.05. "
-    "See `docs/data_drift.md`."
+    "Drift monitor uses a KS test on numeric features vs the training split. "
+    "Batch drift = at least 3 features with p < 0.05."
 )
+st.markdown("</div>", unsafe_allow_html=True)

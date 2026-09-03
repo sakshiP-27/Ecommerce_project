@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="72" viewBox="0 0 280 72" fill="none">
+  <rect width="280" height="72" rx="12" fill="#1B2632"/>
+  <rect x="12" y="12" width="48" height="48" rx="12" fill="#2C3B4D" stroke="#D89A6A" stroke-width="1.5"/>
+  <path d="M24 28h8l3 18h16l4-12H33" stroke="#D89A6A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="38" cy="50" r="2.2" fill="#EEE9DF"/>
+  <circle cx="50" cy="50" r="2.2" fill="#EEE9DF"/>
+  <text x="76" y="46" fill="#EEE9DF" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="-0.04em">CartIQ</text>
+</svg>

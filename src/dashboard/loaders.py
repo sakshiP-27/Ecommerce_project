@@ -4,7 +4,7 @@ Cached loaders for the Streamlit dashboard.
 - @st.cache_data  → dataset (DataFrame)
 - @st.cache_resource → model / pipeline / SHAP explainer (heavy objects)
 
-Dashboard only READS Week 1–3 artifacts — never retrains or refits.
+Dashboard only READS saved model/pipeline artifacts  -  never retrains or refits.
 """
 
 import sys
@@ -53,7 +53,7 @@ def load_explainer():
 
 @st.cache_resource
 def load_calibrated_model():
-    """Load isotonic-calibrated wrapper if the stretch-goal artifact exists."""
+    """Load isotonic-calibrated wrapper if the optional artifact exists."""
     path = MODELS_DIR / "calibrated_model.pkl"
     if not path.exists():
         return None

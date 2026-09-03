@@ -10,12 +10,16 @@ import plotly.express as px
 import streamlit as st
 
 from src.dashboard.loaders import load_data
+from src.dashboard.theme import FLAME, TRUFFLE, apply_cartiq_theme, page_setup, style_figure
 
-st.set_page_config(page_title="Funnel Analytics", layout="wide")
-st.title("Funnel / Cohort Analytics")
+page_setup("Funnel Analytics")
+apply_cartiq_theme()
+
+st.markdown('<div class="cartiq-kicker">Cohorts</div>', unsafe_allow_html=True)
+st.title("Funnel analytics")
 st.markdown(
-    "Interactive conversion views from the ecommerce sessions dataset "
-    "(Week 1 EDA, rebuilt with Plotly)."
+    "Interactive conversion views across months, visitor types, traffic sources, "
+    "and weekend vs weekday."
 )
 
 df = load_data()
@@ -43,10 +47,11 @@ with tab1:
         x="Month",
         y="conversion_rate_pct",
         hover_data=["sessions", "purchases"],
-        title="Conversion Rate by Month",
+        title="Conversion rate by month",
         labels={"conversion_rate_pct": "Conversion rate (%)"},
+        color_discrete_sequence=[FLAME],
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig), use_container_width=True)
     st.dataframe(data, use_container_width=True, hide_index=True)
 
 with tab2:
@@ -56,11 +61,12 @@ with tab2:
         x="VisitorType",
         y="conversion_rate_pct",
         hover_data=["sessions", "purchases"],
-        title="Conversion Rate by Visitor Type",
+        title="Conversion rate by visitor type",
         labels={"conversion_rate_pct": "Conversion rate (%)"},
         color="VisitorType",
+        color_discrete_sequence=[FLAME, TRUFFLE, "#C9C1B1"],
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig), use_container_width=True)
     st.dataframe(data, use_container_width=True, hide_index=True)
 
 with tab3:
@@ -71,10 +77,11 @@ with tab3:
         x="TrafficType",
         y="conversion_rate_pct",
         hover_data=["sessions", "purchases"],
-        title="Conversion Rate by Traffic Type",
+        title="Conversion rate by traffic type",
         labels={"conversion_rate_pct": "Conversion rate (%)"},
+        color_discrete_sequence=[FLAME],
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig), use_container_width=True)
     st.dataframe(data, use_container_width=True, hide_index=True)
 
 with tab4:
@@ -85,9 +92,10 @@ with tab4:
         x="Weekend",
         y="conversion_rate_pct",
         hover_data=["sessions", "purchases"],
-        title="Conversion Rate: Weekend vs Weekday",
+        title="Conversion rate: weekend vs weekday",
         labels={"conversion_rate_pct": "Conversion rate (%)", "Weekend": "Day type"},
         color="Weekend",
+        color_discrete_sequence=[FLAME, TRUFFLE],
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(style_figure(fig), use_container_width=True)
     st.dataframe(data, use_container_width=True, hide_index=True)

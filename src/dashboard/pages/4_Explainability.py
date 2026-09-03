@@ -7,10 +7,15 @@ if str(_ROOT) not in sys.path:
 
 import streamlit as st
 
-st.set_page_config(page_title="Explainability", layout="wide")
+from src.dashboard.theme import apply_cartiq_theme, page_setup
+
+page_setup("Explainability")
+apply_cartiq_theme()
+
+st.markdown('<div class="cartiq-kicker">Transparency</div>', unsafe_allow_html=True)
 st.title("Explainability")
 st.markdown(
-    "Global and local explanations from Week 3 (SHAP), plus a short SHAP vs LIME comparison."
+    "Global and local SHAP explanations for CartIQ, plus a short SHAP vs LIME comparison."
 )
 
 reports = _ROOT / "reports"
@@ -24,7 +29,7 @@ with c1:
     if summary_path.exists():
         st.image(str(summary_path), use_container_width=True)
     else:
-        st.warning(f"Missing `{summary_path.name}` — re-save it from the Week 3 notebook.")
+        st.warning(f"Missing `{summary_path.name}`  -  export it from the explainability notebook.")
     st.caption(
         "Each dot is one test session. Position = SHAP impact; color = feature value. "
         "Features at the top matter most overall."
@@ -34,19 +39,19 @@ with c2:
     if bar_path.exists():
         st.image(str(bar_path), use_container_width=True)
     else:
-        st.warning(f"Missing `{bar_path.name}` — re-save it from the Week 3 notebook.")
-    st.caption("Simple ranking of average importance — good for non-technical readers.")
+        st.warning(f"Missing `{bar_path.name}`  -  export it from the explainability notebook.")
+    st.caption("Simple ranking of average importance  -  good for non-technical readers.")
 
 st.subheader("What drives predictions?")
 st.markdown(
     """
 Across the test set, the strongest drivers are typically:
 
-1. **PageValues** — high values push toward purchase; zero/low values push against it
-2. **ProductRelated / TotalPages** — more engagement supports purchase intent
-3. **ExitRates / BounceRates** — higher rates push toward no purchase
+1. **PageValues**  -  high values push toward purchase; zero/low values push against it
+2. **ProductRelated / TotalPages**  -  more engagement supports purchase intent
+3. **ExitRates / BounceRates**  -  higher rates push toward no purchase
 
-Use **Live Session Scoring** for interactive local waterfall explanations on any session.
+Use **Live Scoring** for interactive local waterfall explanations on any session.
 """
 )
 
@@ -60,7 +65,7 @@ st.markdown(
 signal, with **ExitRates** and thin browsing also hurting.
 
 **Uncertain (near threshold):** Both say **PageValues** pushes up while **ExitRates**
-(and weaker product activity) pull down — which is why the score sits near the boundary.
+(and weaker product activity) pull down  -  which is why the score sits near the boundary.
 
 **Overall:** SHAP and LIME largely agree on the top features (especially PageValues),
 which makes the explanations more trustworthy.
@@ -68,6 +73,6 @@ which makes the explanations more trustworthy.
 )
 
 st.info(
-    "SHAP charts here are static exports from Week 3 (matplotlib). "
-    "Funnel / comparison pages use interactive Plotly charts."
+    "Global SHAP charts here are static exports. "
+    "Funnel and comparison pages use interactive Plotly charts themed for CartIQ."
 )

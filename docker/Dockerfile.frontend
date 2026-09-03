@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 COPY reports/ ./reports/
 COPY dataset/ ./dataset/
+COPY .streamlit/ ./.streamlit/
 
 EXPOSE 8501
 CMD ["streamlit", "run", "src/dashboard/Home.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true"]
