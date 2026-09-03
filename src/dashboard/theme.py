@@ -360,6 +360,146 @@ div[data-testid="stAlert"] {{
   margin-bottom: 1.1rem;
 }}
 
+/* Landing page */
+.cartiq-landing-hero {{
+  margin-top: 0.5rem;
+}}
+
+.cartiq-section-title {{
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: clamp(1.45rem, 2.6vw, 1.9rem) !important;
+  font-weight: 600 !important;
+  color: {PALLADIAN} !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 0 1rem !important;
+}}
+
+.cartiq-body {{
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: {OATMEAL};
+  margin: 0 0 0.85rem;
+}}
+
+.cartiq-media {{
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(238, 233, 223, 0.1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  background: {ABYSS};
+}}
+
+.cartiq-media img {{
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.05);
+}}
+
+.cartiq-media-sm img {{
+  height: 150px;
+}}
+
+.cartiq-step, .cartiq-feature {{
+  background: rgba(27, 38, 50, 0.55);
+  border: 1px solid rgba(238, 233, 223, 0.1);
+  border-radius: 16px;
+  padding: 0.95rem;
+  height: 100%;
+  margin-bottom: 1rem;
+}}
+
+.cartiq-step-num {{
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: {FLAME};
+  margin: 0.75rem 0 0.25rem;
+}}
+
+.cartiq-step-title {{
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: 1.15rem !important;
+  color: {PALLADIAN} !important;
+  margin: 0 0 0.45rem !important;
+  font-weight: 600 !important;
+}}
+
+.cartiq-feature-icon {{
+  width: 100%;
+  height: 150px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: {FLAME};
+  background:
+    linear-gradient(145deg, {ABYSS} 0%, {BLUE_FANTASTIC} 55%, {EMBER} 100%);
+  border: 1px solid rgba(232, 149, 74, 0.28);
+  margin-bottom: 0.75rem;
+}}
+
+.cartiq-cta-band {{
+  margin: 1.25rem 0 0.85rem;
+  padding: 1.35rem 1.4rem;
+  border-radius: 16px;
+  background:
+    linear-gradient(125deg, {ABYSS} 0%, {BLUE_FANTASTIC} 45%, {EMBER} 78%, {TRUFFLE} 100%);
+  border: 1px solid rgba(238, 233, 223, 0.1);
+}}
+
+.cartiq-cta-title {{
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.35rem;
+}}
+
+.cartiq-footer {{
+  margin-top: 2.5rem;
+  padding: 1.5rem 0 0.5rem;
+  border-top: 1px solid rgba(238, 233, 223, 0.12);
+  text-align: center;
+}}
+
+.cartiq-footer-brand {{
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: {PALLADIAN};
+  margin: 0 0 0.25rem;
+}}
+
+.cartiq-footer-name {{
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  color: {FLAME};
+  margin: 0 0 0.25rem;
+}}
+
+.cartiq-footer-note {{
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 0.88rem;
+  color: {OATMEAL};
+  margin: 0;
+}}
+
+.cartiq-fade {{
+  animation: cartiqFade 750ms ease both;
+}}
+
+@keyframes cartiqFade {{
+  from {{ opacity: 0; transform: translateY(14px); }}
+  to {{ opacity: 1; transform: translateY(0); }}
+}}
+
 @keyframes cartiqRise {{
   from {{ opacity: 0; transform: translateY(12px); }}
   to {{ opacity: 1; transform: translateY(0); }}
@@ -368,6 +508,9 @@ div[data-testid="stAlert"] {{
 @media (max-width: 768px) {{
   .cartiq-hero-inner {{
     grid-template-columns: 1fr;
+  }}
+  .cartiq-media img {{
+    height: 200px;
   }}
 }}
 </style>
